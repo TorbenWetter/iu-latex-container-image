@@ -1,5 +1,5 @@
 # A Docker Image for Writing Scientific Work using TeX Live
 
-This image is based on [Ubuntu 22.10 Kinetic](https://hub.docker.com/layers/library/buildpack-deps/kinetic-curl/images/sha256-8f2e95201750f27ae11350dbd1be2b91478bda92d5f4e1387fffaeb83dabb687) and contains a basic TeX Live installation.
+This image is based on a `buildpack-deps` image ([Ubuntu 22.10 Kinetic](https://hub.docker.com/layers/library/buildpack-deps/kinetic-curl/images/sha256-4f07626230eb88038d29415ea16d352ce8bae03f6e7bf2279a03e173f2f7032d)) and contains a basic TeX Live installation.
 
-Packages are installed using `apt-get` and `tlmgr`, and the locale is set to `de_DE.UTF-8`.
+LaTeX-specific packages are pre-installed using `apt-get` and `tlmgr`, and the locale is set to `de_DE.UTF-8`.
