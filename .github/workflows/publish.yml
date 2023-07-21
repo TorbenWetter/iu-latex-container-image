@@ -10,8 +10,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  BASE_IMAGE_NAME: ${{ github.repository }}-base
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   changes:
@@ -35,9 +33,27 @@ jobs:
               - Dockerfile
           base: main
 
+  construct-image-names:
+    name: Construct Image Names
+    needs: changes
+    if: needs.changes.outputs.base_dockerfile == 'true' || needs.changes.outputs.dockerfile == 'true'
+    runs-on: ubuntu-latest
+
+    outputs:
+      base_image_name: ${{ steps.image_names.outputs.base_image_name }}
+      image_name: ${{ steps.image_names.outputs.image_name }}
+
+    steps:
+      - name: Construct image names
+        id: image_names
+        run: |
+          export LOWERCASE_REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+          echo "base_image_name=$LOWERCASE_REPO_NAME-base" >> $GITHUB_OUTPUT
+          echo "image_name=$LOWERCASE_REPO_NAME" >> $GITHUB_OUTPUT
+
   build-and-push-base-image:
     name: Build and Push Base Image
-    needs: changes
+    needs: [changes, construct-image-names]
     if: needs.changes.outputs.base_dockerfile == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -52,7 +68,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ needs.construct-image-names.outputs.base_image_name }}
           tags: |
             latest
 
@@ -81,7 +97,7 @@ jobs:
 
   build-and-push-image:
     name: Build and Push Image
-    needs: [changes, build-and-push-base-image]
+    needs: [changes, construct-image-names, build-and-push-base-image]
     if: always() && needs.changes.outputs.dockerfile == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -96,7 +112,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ needs.construct-image-names.outputs.image_name }}
           tags: |
             latest
 
@@ -119,7 +135,7 @@ jobs:
           context: .
           file: Dockerfile
           build-args: |
-            BASE_IMAGE=${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}
+            BASE_IMAGE=${{ env.REGISTRY }}/${{ needs.construct-image-names.outputs.base_image_name }}
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
