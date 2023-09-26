@@ -11,7 +11,7 @@ RUN tlmgr update --self --all \
 
 # Install the IU LaTeX package.
 RUN mkdir -p $TEXMFHOME/tex/latex/iuthesis \
-  && wget -qO $TEXMFHOME/tex/latex/iuthesis/iuthesis.sty https://github.com/TorbenWetter/iu-latex-package/releases/download/v0.0.1/iuthesis.sty
+  && wget -qO $TEXMFHOME/tex/latex/iuthesis/iuthesis.sty https://github.com/TorbenWetter/iu-latex-package/releases/download/v0.0.2/iuthesis.sty
 
 # Update the ls-R databases with the locations of the newly installed files.
 RUN texhash $TEXMFHOME \
