@@ -52,7 +52,7 @@ ENV TEXMFLOCAL $TEXDIR/texmf-local
 
 # Install the latest version of TeX Live and add it to the path.
 RUN wget -qO - https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz --strip-components=1 \
-  && perl ./install-tl --no-interaction --scheme=basic --no-doc-install --no-src-install --texdir=$TEXDIR --texuserdir=$TEXUSERDIR
+  && perl ./install-tl --no-interaction --scheme=basic --no-doc-install --no-src-install --texdir=$TEXDIR --texuserdir=$TEXUSERDIR --repository https://mirror.ctan.org/systems/texlive/tlnet
 ENV PATH $TEXDIR/bin/aarch64-linux:$TEXDIR/bin/x86_64-linux:$PATH
 
 # Clean up.
