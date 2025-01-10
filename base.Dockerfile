@@ -15,7 +15,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # Install required Perl modules.
-RUN cpanm File::HomeDir Pod::Usage YAML::Tiny
+RUN cpanm DateTime::Calendar::Julian DateTime::Format::Builder File::HomeDir Pod::Usage YAML::Tiny
 
 # Generate the German locale and set it as the default.
 RUN locale-gen de_DE.UTF-8
