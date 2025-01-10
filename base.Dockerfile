@@ -1,6 +1,6 @@
-# Use the `kinetic` variant of the buildpack-deps image as the base image.
+# Use the `jammy` variant of the buildpack-deps image as the base image.
 # It is based on Ubuntu and includes common tools and libraries such as Git, GCC, and OpenSSL, as well as programming languages like Ruby, Node.js, and Python.
-ARG VARIANT="kinetic"
+ARG VARIANT="jammy"
 FROM buildpack-deps:${VARIANT}-curl
 
 # Accept the Microsoft EULA for the fonts (Arial).
