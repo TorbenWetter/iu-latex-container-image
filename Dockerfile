@@ -7,7 +7,7 @@ USER vscode
 # Update the TeX Live package manager, install and update additional packages.
 RUN tlmgr option repository https://mirror.ctan.org/systems/texlive/tlnet \
   && tlmgr update --self --all \
-  && tlmgr install babel-german biblatex biblatex-apa booktabs caption csquotes etoolbox fancyvrb fontspec hyphen-german latexindent latexmk minted newfloat parskip ragged2e setspace sidecap titlesec upquote \
+  && tlmgr install babel-german biblatex biblatex-apa booktabs caption csquotes etoolbox fancyvrb fontspec hyphen-german latexindent latexmk minted newfloat parskip ragged2e setspace sidecap titlesec tools upquote \
   && tlmgr update --all
 
 # Install the IU LaTeX package.
