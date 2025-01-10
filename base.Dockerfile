@@ -14,8 +14,8 @@ RUN apt-get update \
   && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists/*
 
-# Install required Perl modules.
-RUN cpanm DateTime::Calendar::Julian DateTime::Format::Builder File::HomeDir Pod::Usage YAML::Tiny
+# Install required Perl module.
+RUN cpanm Module::Build
 
 # Generate the German locale and set it as the default.
 RUN locale-gen de_DE.UTF-8
@@ -29,14 +29,11 @@ WORKDIR /biber
 # Download the source code of the required Biber version and extract it.
 RUN wget -qO - https://github.com/plk/biber/archive/v2.20/biber-2.20.tar.gz | tar xz --strip-components=1
 
-# Install the Perl dependencies and add them to the library path.
-RUN cpanm --installdeps .
-ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
+# Install all dependencies automatically using Build.PL.
+RUN perl ./Build.PL && ./Build installdeps
 
 # Build the required Biber binary.
-RUN perl Build.PL \
-  && ./Build \
-  && ./Build install
+RUN ./Build && ./Build install
 
 # Clean up.
 RUN rm -rf /biber
