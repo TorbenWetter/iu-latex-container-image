@@ -27,7 +27,7 @@ ENV LC_ALL de_DE.UTF-8
 WORKDIR /biber
 
 # Download the source code of the required Biber version and extract it.
-RUN wget -qO - https://github.com/plk/biber/archive/v2.19/biber-2.19.tar.gz | tar xz --strip-components=1
+RUN wget -qO - https://github.com/plk/biber/archive/v2.20/biber-2.20.tar.gz | tar xz --strip-components=1
 
 # Install the Perl dependencies and add them to the library path.
 RUN cpanm --installdeps .
