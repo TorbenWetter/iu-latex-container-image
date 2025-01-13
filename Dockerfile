@@ -11,7 +11,7 @@ LABEL org.opencontainers.image.licenses="MIT"
 USER vscode
 
 # Version of the IU LaTeX package to install.
-ARG IU_LATEX_VERSION=0.0.4
+ARG IU_LATEX_VERSION=0.0.5
 
 # Update TeX Live and install required packages.
 # The packages are grouped by their primary purpose:
@@ -22,6 +22,7 @@ ARG IU_LATEX_VERSION=0.0.4
 RUN tlmgr option repository https://mirror.ctan.org/systems/texlive/tlnet \
   && tlmgr update --self --all \
   && tlmgr install \
+    appendix \
     babel-german \
     biblatex \
     biblatex-apa \
