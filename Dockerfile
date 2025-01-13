@@ -15,10 +15,10 @@ ARG IU_LATEX_VERSION=0.0.4
 
 # Update TeX Live and install required packages.
 # The packages are grouped by their primary purpose:
-# - Language support: babel-german, hyphen-german
-# - Bibliography: biblatex, biblatex-apa
-# - Typography and layout: booktabs, caption, csquotes, fancyvrb, fontspec, ragged2e, setspace, titlesec
-# - Code and technical: etoolbox, latexindent, latexmk, lineno, minted, newfloat, parskip, sidecap, upquote
+# - Language support: babel-german, hyphen-german.
+# - Bibliography: biblatex, biblatex-apa.
+# - Typography and layout: booktabs, caption, csquotes, fancyvrb, fontspec, ragged2e, setspace, titlesec.
+# - Code and technical: etoolbox, latexindent, latexmk, lineno, minted, newfloat, parskip, sidecap, upquote.
 RUN tlmgr option repository https://mirror.ctan.org/systems/texlive/tlnet \
   && tlmgr update --self --all \
   && tlmgr install \
