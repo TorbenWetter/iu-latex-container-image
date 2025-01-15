@@ -11,7 +11,7 @@ LABEL org.opencontainers.image.licenses="MIT"
 USER vscode
 
 # Version of the IU LaTeX package to install.
-ARG IU_LATEX_VERSION=0.0.7
+ARG IU_LATEX_VERSION=0.0.8
 
 # Update TeX Live and install required packages.
 # The packages are grouped by their primary purpose:
