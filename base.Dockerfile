@@ -59,7 +59,7 @@ RUN rm -rf /texlive
 WORKDIR /home/vscode
 
 # Create the "vscode" user.
-RUN groupadd -g 1000 vscode && useradd -r -u 1000 -g vscode vscode
+RUN groupadd -g 1001 vscode && useradd -r -u 1001 -g vscode vscode
 
 # Change the owner of the home directory to the "vscode" user.
 RUN chown -R vscode:vscode /home/vscode
