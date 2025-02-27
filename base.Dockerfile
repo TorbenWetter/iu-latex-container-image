@@ -19,9 +19,9 @@ RUN cpanm Module::Build YAML::Tiny File::HomeDir Unicode::GCString Log::Log4perl
 
 # Generate the German locale and set it as the default.
 RUN locale-gen de_DE.UTF-8
-ENV LANG de_DE.UTF-8
-ENV LANGUAGE de_DE:de
-ENV LC_ALL de_DE.UTF-8
+ENV LANG=de_DE.UTF-8
+ENV LANGUAGE=de_DE:de
+ENV LC_ALL=de_DE.UTF-8
 
 ### BIBER ###
 WORKDIR /biber
@@ -42,15 +42,15 @@ RUN rm -rf /biber
 WORKDIR /texlive
 
 # Define environment variables for TeX Live.
-ENV TEXDIR /usr/local/texlive
-ENV TEXUSERDIR ~/.texlive
-ENV TEXMFHOME /home/vscode/texmf
-ENV TEXMFLOCAL $TEXDIR/texmf-local
+ENV TEXDIR=/usr/local/texlive
+ENV TEXUSERDIR=~/.texlive
+ENV TEXMFHOME=/home/vscode/texmf
+ENV TEXMFLOCAL=$TEXDIR/texmf-local
 
 # Install the latest version of TeX Live and add it to the path.
 RUN wget -qO - https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz --strip-components=1 \
   && perl ./install-tl --no-interaction --scheme=basic --no-doc-install --no-src-install --texdir=$TEXDIR --texuserdir=$TEXUSERDIR --repository https://mirror.ctan.org/systems/texlive/tlnet
-ENV PATH $TEXDIR/bin/aarch64-linux:$TEXDIR/bin/x86_64-linux:$PATH
+ENV PATH=$TEXDIR/bin/aarch64-linux:$TEXDIR/bin/x86_64-linux:$PATH
 
 # Clean up.
 RUN rm -rf /texlive
