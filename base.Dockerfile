@@ -9,13 +9,13 @@ RUN echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula sele
 # Install additional OS packages and clean up.
 RUN apt-get update \
   && export DEBIAN_FRONTEND=noninteractive \
-  && apt-get install -y --no-install-recommends build-essential cpanminus libbz2-dev libc6-dev libbtparse-dev libdatetime-perl libexpat1-dev libffi-dev libgdbm-dev liblzma-dev libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev libxml2 libxml2-dev libxslt1.1 libxslt1-dev llvm locales make python3-pygments tk-dev ttf-mscorefonts-installer zlib1g-dev \
+  && apt-get install -y --no-install-recommends build-essential chktex cpanminus libbz2-dev libc6-dev libbtparse-dev libdatetime-perl libexpat1-dev libffi-dev libgdbm-dev liblzma-dev libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev libxml2 libxml2-dev libxslt1.1 libxslt1-dev llvm locales make python3-pygments tk-dev ttf-mscorefonts-installer zlib1g-dev \
   && apt-get clean autoclean \
   && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists/*
 
-# Install required Perl module.
-RUN cpanm Module::Build
+# Install required Perl modules.
+RUN cpanm Module::Build YAML::Tiny File::HomeDir Unicode::GCString Log::Log4perl Log::Dispatch::File
 
 # Generate the German locale and set it as the default.
 RUN locale-gen de_DE.UTF-8
