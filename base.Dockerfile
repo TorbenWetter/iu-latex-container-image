@@ -1,6 +1,6 @@
-# Use the `jammy` variant of the buildpack-deps image as the base image.
+# Use the `noble` variant of the buildpack-deps image as the base image.
 # It is based on Ubuntu and includes common tools and libraries such as Git, GCC, and OpenSSL, as well as programming languages like Ruby, Node.js, and Python.
-ARG VARIANT="jammy"
+ARG VARIANT="noble"
 FROM buildpack-deps:${VARIANT}-curl
 
 # Accept the Microsoft EULA for the fonts (Arial).

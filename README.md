@@ -4,7 +4,7 @@ This Docker image provides a complete LaTeX environment specifically configured 
 
 ## Features
 
-- Based on `buildpack-deps` image (`Ubuntu 22.04 Jammy`)
+- Based on `buildpack-deps` image (`Ubuntu 24.04 Noble`)
 - Full TeX Live installation with commonly used packages
 - Pre-configured with German locale (`de_DE.UTF-8`)
 - Includes the [IU LaTeX Package](https://github.com/TorbenWetter/iu-latex-package) for scientific writing at IU International University
